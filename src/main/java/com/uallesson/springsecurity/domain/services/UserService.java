@@ -1,7 +1,7 @@
 package com.uallesson.springsecurity.domain.services;
 
-import com.uallesson.springsecurity.domain.models.Role;
-import com.uallesson.springsecurity.domain.models.User;
+import com.uallesson.springsecurity.domain.entities.Role;
+import com.uallesson.springsecurity.domain.entities.User;
 
 import java.util.List;
 
