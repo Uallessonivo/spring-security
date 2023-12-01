@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.List;
 
 public interface UserService {
+    User saveUser(User user);
     User findByUsername(String username);
     User findByEmail(String email);
     Role saveRole(Role role);

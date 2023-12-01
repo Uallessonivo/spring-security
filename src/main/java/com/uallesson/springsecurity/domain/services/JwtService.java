@@ -1,6 +1,5 @@
 package com.uallesson.springsecurity.domain.services;
 
-import com.uallesson.springsecurity.domain.entities.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public interface JwtService {

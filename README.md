@@ -20,10 +20,8 @@ This project is a simple example of how to use Spring Security with JWT.
 - Login
 - Register
 - Get all users
-- Get user by id
-- Update user
-- Delete user
-- Refresh token
+- Get user by username
+- Get user by email
 - Role based authorization
 
 ## Usage
@@ -60,20 +58,14 @@ POST http://localhost:8080/api/auth/register
 GET http://localhost:8080/api/users
 ```
 
-- Get user by id
+- Get user by username
 
 ```bash
-GET http://localhost:8080/api/users/{id}
+GET http://localhost:8080/api/users/{username}
 ```
 
-- Update user
+- Get user by email
 
 ```bash
-PUT http://localhost:8080/api/users/{id}
-```
-
-- Delete user
-
-```bash
-DELETE http://localhost:8080/api/users/{id}
+GET http://localhost:8080/api/users/{email}
 ```

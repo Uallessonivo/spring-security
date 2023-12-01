@@ -34,7 +34,7 @@ public class UserController {
         return userService.saveRole(role);
     }
 
-    @PostMapping("/users/{username}/roles/{roleName}")
+    @PostMapping("/roles/{roleName}/username/{username}")
     public void addRoleToUser(@PathVariable String username, @PathVariable String roleName) {
         userService.addRoleToUser(username, roleName);
     }
