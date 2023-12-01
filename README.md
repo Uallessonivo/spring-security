@@ -11,10 +11,9 @@ This project is a simple example of how to use Spring Security with JWT.
 - Spring Web
 - Spring Boot
 - Spring Security
-- Spring Data JPA
-- MySQL
-- DevTools
-- Lombok
+- JPA
+- H2
+- Json Web Token
 
 ## Features
 
@@ -26,14 +25,6 @@ This project is a simple example of how to use Spring Security with JWT.
 - Delete user
 - Refresh token
 - Role based authorization
-
-## Docker
-
-- MySQL
-    
-```bash
-docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=jwt -p 3306:3306 -d mysql:latest
-```
 
 ## Usage
 

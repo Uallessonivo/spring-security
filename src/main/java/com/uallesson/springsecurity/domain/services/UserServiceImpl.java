@@ -14,46 +14,35 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
-public class UserServiceImpl implements UserService, UserDetailsService {
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
-    }
-
-    @Override
-    public User saveUser(User user) {
-        user.setHashedPassword(passwordEncoder.encode(user.getHashedPassword()));
-        return userRepository.save(user);
-    }
 
     @Override
     public User findByUsername(String username) {
-        User user = userRepository.findByUsername(username);
+        Optional<User> user = userRepository.findByUsername(username);
 
-        if (user == null) {
+        if (user.isEmpty()) {
             throw new DomainException("User does not exist");
         }
 
-        return user;
+        return user.get();
     }
 
     @Override
     public User findByEmail(String email) {
-        User user = userRepository.findByEmail(email);
+        Optional<User> user = userRepository.findByEmail(email);
 
-        if (user == null) {
+        if (user.isEmpty()) {
             throw new DomainException("User does not exist");
         }
 
-        return user;
+        return user.get();
     }
 
     @Override
@@ -63,9 +52,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void addRoleToUser(String username, String roleName) {
-        User user = userRepository.findByUsername(username);
+        Optional<User> user = userRepository.findByUsername(username);
 
-        if (user == null) {
+        if (user.isEmpty()) {
             throw new DomainException("User does not exist");
         }
 
@@ -75,11 +64,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new DomainException("Role does not exist");
         }
 
-        user.getRoles().add(role);
+        user.get().getRoles().add(role);
     }
 
     @Override
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
+                return userRepository.findByEmail(userEmail)
+                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            }
+        };
     }
 }

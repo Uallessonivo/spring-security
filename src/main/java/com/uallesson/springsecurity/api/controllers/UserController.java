@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
@@ -27,11 +27,6 @@ public class UserController {
     @GetMapping("/{email}")
     public User getUserByEmail(@PathVariable String email) {
         return userService.findByEmail(email);
-    }
-
-    @PostMapping("/users")
-    public User saveUser(@RequestBody User user) {
-        return userService.saveUser(user);
     }
 
     @PostMapping("/roles")
